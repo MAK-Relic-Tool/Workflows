@@ -1,0 +1,58 @@
+name: PyTest
+
+on:
+  workflow_call:
+
+    inputs:
+      python-version:
+        required: true
+        type: string
+
+      setup-path:
+        type: string
+
+      test-path:
+        type: string
+
+      requirements-file:
+        type: string
+
+    defaults:
+      setup-path: "."
+      test-path: ''
+      requirements-file: 'test-requirements.txt'
+
+    jobs:
+      pytest:
+        runs-on: ubuntu-latest
+
+        name: PyTest ${{ inputs.python-version }}
+
+        steps:
+          - name: Checkout Repo
+            uses: actions/checkout@v3
+
+          - name: Setup Python ${{ inputs.python-version }}
+            uses: actions/setup-python@v4
+            with:
+              python-version: ${{ inputs.python-version }}
+
+          - name: Upgrade Pip
+            run: |
+              python -m pip install --upgrade pip
+
+          - name: Install Tools (Wheel, Setuptools, Pytest)
+            run: |
+              python -m pip install wheel setuptools pytest
+
+          - name: Install Testing Requirements
+            run: |
+              if [ -f ${{ inputs.requirements-file }} ]; then pip install -r ${{ inputs.requirements-file }}; fi
+
+          - name: Build & Install Repo
+            run: |
+              python -m pip install ${{ inputs.setup-path }}
+
+          - name: Run PyTest
+            run: |
+              pytest -v ${{ inputs.test-path }}
