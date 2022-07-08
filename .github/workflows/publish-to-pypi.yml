@@ -2,10 +2,8 @@ name: Publish to PyPI
 
 on:
   workflow_call:
-
     inputs:
       python-version:
-        required: true
         type: string
 
       path:
@@ -15,6 +13,9 @@ on:
     secrets:
       pypi-token:
         required: true
+
+    defaults:
+      python-version: "3.x"
 
     jobs:
       pypi:

@@ -2,12 +2,7 @@ name: MyPy
 
 on:
   workflow_call:
-
     inputs:
-      python-version:
-        required: true
-        type: string
-
       package:
         required: true
         type: string
@@ -26,16 +21,21 @@ on:
       mypy:
         runs-on: ubuntu-latest
 
-        name: MyPy ${{ inputs.python-version }}
+        strategy:
+          fail-fast: false
+          matrix:
+            python-version: ["3.9", "3.10"]
+
+        name: MyPy ${{ matrix.python-version }}
 
         steps:
           - name: Checkout Repo
             uses: actions/checkout@v3
 
-          - name: Setup Python ${{ inputs.python-version }}
+          - name: Setup Python ${{ matrix.python-version }}
             uses: actions/setup-python@v4
             with:
-              python-version: ${{ inputs.python-version }}
+              python-version: ${{ matrix.python-version }}
 
           - name: Upgrade Pip
             run: |
