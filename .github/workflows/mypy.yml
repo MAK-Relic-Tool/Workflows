@@ -13,13 +13,14 @@ on:
       mypy-config:
         type: string
 
-    defaults:
-      setup-path: "."
-      mypy-config: "mypy.ini"
 
 jobs:
   mypy:
     runs-on: ubuntu-latest
+
+    defaults:
+      setup-path: "."
+      mypy-config: "mypy.ini"
 
     strategy:
       fail-fast: false

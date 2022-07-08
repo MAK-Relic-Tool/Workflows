@@ -12,15 +12,14 @@ on:
 
       requirements-file:
         type: string
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
 
     defaults:
       setup-path: "."
       test-path: ''
       requirements-file: 'test-requirements.txt'
-
-jobs:
-  pytest:
-    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false

@@ -6,20 +6,21 @@ on:
       python-version:
         type: string
 
-      path:
-        required: true
+      setup-path:
         type: string
 
     secrets:
       pypi-token:
         required: true
 
-    defaults:
-      python-version: "3.x"
 
 jobs:
   pypi:
     runs-on: ubuntu-latest
+
+    defaults:
+      setup-path: "."
+      python-version: "3.x"
 
     name: Publish to PyPI
 
