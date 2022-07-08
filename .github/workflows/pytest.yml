@@ -6,20 +6,16 @@ on:
     inputs:
       setup-path:
         type: string
-
+        default:  "."
       test-path:
         type: string
-
+        default: ""
       requirements-file:
         type: string
+        default: "test-requirements.txt"
 jobs:
   pytest:
     runs-on: ubuntu-latest
-
-    defaults:
-      setup-path: "."
-      test-path: ''
-      requirements-file: 'test-requirements.txt'
 
     strategy:
       fail-fast: false

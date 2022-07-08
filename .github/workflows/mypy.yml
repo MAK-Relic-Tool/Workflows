@@ -6,21 +6,17 @@ on:
       package:
         required: true
         type: string
-
       setup-path:
         type: string
-
+        default: "."
       mypy-config:
         type: string
+        default: "mypy.ini"
 
 
 jobs:
   mypy:
     runs-on: ubuntu-latest
-
-    defaults:
-      setup-path: "."
-      mypy-config: "mypy.ini"
 
     strategy:
       fail-fast: false
