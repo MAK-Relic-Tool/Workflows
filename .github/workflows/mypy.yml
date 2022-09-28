@@ -48,4 +48,4 @@ jobs:
 
       - name: Run MyPy
         run: |
-          mypy --config-file ${{ inputs.mypy-config }} --install-types --namespace-packages -p ${{ inputs.package }}
+          mypy --config-file ${{ inputs.mypy-config }} --namespace-packages -p ${{ inputs.package }}
