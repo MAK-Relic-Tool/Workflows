@@ -41,10 +41,6 @@ jobs:
       - name: Install Tools (Wheel, Setuptools, MyPy)
         run: |
           python -m pip install wheel setuptools mypy
-          
-      - name: Install Mypy Stubs
-        run: |
-          mypy --install-types
 
       - name: Build & Install Repo
         run: |
@@ -52,4 +48,4 @@ jobs:
 
       - name: Run MyPy
         run: |
-          mypy --config-file ${{ inputs.mypy-config }} --namespace-packages -p ${{ inputs.package }}
+          mypy --config-file ${{ inputs.mypy-config }} --install-types --namespace-packages -p ${{ inputs.package }}
