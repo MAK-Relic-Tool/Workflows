@@ -13,6 +13,9 @@ on:
       requirements-file:
         type: string
         default: "test-requirements.txt"
+       repository:
+        default: ${{ github.repository }}
+       
 jobs:
   pytest:
     runs-on: ubuntu-latest
@@ -27,6 +30,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+            repository: ${{ inputs.repository }}
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
