@@ -1,0 +1,22 @@
+name: Black
+
+on:
+  workflow_call:
+    inputs:
+      source-path:
+        type: string
+        default: "./src"
+
+jobs:
+  black:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+
+      - name: Run Black
+        uses: psf/black@stable
+        with:
+            options:: "--check --verbose"
+            src: ${{source-path}}
