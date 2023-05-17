@@ -23,5 +23,5 @@ jobs:
       - name: Run Black
         uses: psf/black@stable
         with:
-            options: "--check --verbose"
+            options: "--check --verbose --color"
             src: ${{ inputs.path }}
