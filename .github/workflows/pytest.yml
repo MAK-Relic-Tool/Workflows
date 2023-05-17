@@ -13,7 +13,8 @@ on:
       requirements-file:
         type: string
         default: "test-requirements.txt"
-       repository:
+      repository:
+        type: string
         default: ${{ github.repository }}
        
 jobs:
