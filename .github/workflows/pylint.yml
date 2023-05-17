@@ -10,6 +10,9 @@ on:
       requirements-file:
         type: string
         default: "requirements.txt"
+      repository:
+        type: string
+        default: ${{ github.repository }}
 
 jobs:
   pylint:
@@ -25,6 +28,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.repository }}
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
