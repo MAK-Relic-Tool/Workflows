@@ -3,7 +3,7 @@ name: Black
 on:
   workflow_call:
     inputs:
-      source-path:
+      path:
         type: string
         default: "./src"
 
@@ -18,5 +18,5 @@ jobs:
       - name: Run Black
         uses: psf/black@stable
         with:
-            options:: "--check --verbose"
-            src: ${{source-path}}
+            options: "--check --verbose"
+            src: ${{path}}
