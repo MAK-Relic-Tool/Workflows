@@ -14,7 +14,7 @@ on:
         default: "mypy.ini"
       repository:
         type: string
-        default: ${{ github.repository }}
+        default: ${{ inputs.repository }}
 
 
 jobs:
