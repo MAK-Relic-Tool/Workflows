@@ -6,6 +6,9 @@ on:
       path:
         type: string
         default: "./src"
+      repository:
+        type: string
+        default: ${{ github.repository }}
 
 jobs:
   black:
@@ -14,6 +17,8 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.repository }}
 
       - name: Run Black
         uses: psf/black@stable
