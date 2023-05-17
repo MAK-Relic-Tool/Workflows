@@ -5,8 +5,8 @@ on:
 
     inputs:
       path:
-        required: true
         type: string
+        default: "src"
       requirements-file:
         type: string
         default: "requirements.txt"
