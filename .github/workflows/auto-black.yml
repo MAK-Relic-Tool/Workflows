@@ -1,0 +1,37 @@
+name: auto-black
+on:
+  workflow_call:
+    inputs:
+      path:
+        type: string
+        default: "./src"
+      head:
+        type: string
+        default: ${{ github.head_ref }}
+jobs:
+  auto-black:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.head }}
+      - name: Check Black
+        id: black-check
+        uses: psf/black@stable
+        with:
+            src: ${{ inputs.path }}
+            options: "--check --diff"
+      - name: Run Black
+        if: steps.black-check.outputs.exit-code == '1'
+        with:
+            src: ${{ inputs.path }}
+      - name: Push changes
+        if: steps.black-check.outputs.exit-code == '1'
+        uses: peter-evans/create-pull-request@v5.0.2
+        with:
+          title: Black CI
+          commit-message: Automatic Black Formatting
+          body: "```${{ join(steps.black-check.outputs.*, '\n') }}```"
+          labels: formatting, CI
+          branch: "auto-black"
