@@ -52,8 +52,9 @@ jobs:
           python -m pip install ${{ inputs.setup-path }}
 
       - name: Install MyPy Stubs
+        continue-on-error: true
         run: |
-          mypy --install-types
+          mypy --config-file ${{ inputs.mypy-config }} --namespace-packages -p ${{ inputs.package }} --install-types --non-interactive
 
       - name: Run MyPy
         run: |
