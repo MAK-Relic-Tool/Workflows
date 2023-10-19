@@ -57,4 +57,4 @@ jobs:
 
       - name: Run PyTest
         run: |
-          pytest -v ${{ inputs.test-path }}
+          pytest -v ${{ inputs.test-path }} --color=yes
