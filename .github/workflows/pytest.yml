@@ -51,8 +51,9 @@ jobs:
           python -m pip install wheel setuptools pytest
 
       - name: Install Testing Requirements
+        if: ${{ hashFiles(inputs.requirements-file) != '' }}
         run: |
-          if [ -f ${{ inputs.requirements-file }} ]; then pip install -r ${{ inputs.requirements-file }}; fi
+          pip install -r ${{ inputs.requirements-file }}
 
       - name: Build & Install Repo
         run: |
