@@ -7,3 +7,6 @@ To circumvent that, I created these files as templates
 Replace any necessary literal variables (currently I mark them inside `${{}}` 
 
 E.G. `${{ 'some literal value' }})`
+
+## Dependabot
+Dependabot isn't actually a workflow, but having a template for it is still nice
