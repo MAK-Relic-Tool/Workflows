@@ -1,4 +1,4 @@
-name: Publish to PyPI
+name: Publish to Test PyPI
 
 on:
   workflow_call:
@@ -34,7 +34,7 @@ jobs:
 
   publish-dist:
     needs: build-dist
-    uses: MAK-Relic-Tool/Workflows/.github/workflows/build/publish-dist-to-pypi.yaml
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/build/publish-dist-to-testpypi.yaml
     with:
       package-name: ${{ inputs.package-name }}
       artifact-name: ${{ inputs.artifact-name }}
