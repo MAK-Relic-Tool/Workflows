@@ -34,7 +34,7 @@ jobs:
 
   publish-dist:
     needs: build-dist
-    uses: MAK-Relic-Tool/Workflows/.github/workflows/publish-dist-to-testpypi.yml
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/publish-dist-to-testpypi.yml@main
     with:
       package-name: ${{ inputs.package-name }}
       artifact-name: ${{ inputs.artifact-name }}
