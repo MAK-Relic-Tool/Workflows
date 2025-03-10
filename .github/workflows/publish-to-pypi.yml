@@ -6,43 +6,43 @@ on:
       python-version:
         type: string
         default: "3.x"
+        
       setup-path:
         type: string
         default: "."
 
-    secrets:
-      pypi-token:
+      package-name:
+        type: string
         required: true
 
-
 jobs:
-  pypi:
+  pypi-publish:
+    name: Upload to PyPI
     runs-on: ubuntu-latest
-
-    name: Publish to PyPI
-
+    environment:
+      name: pypi
+      url: https://pypi.org/p/${{ inputs.package-name }}x
+    permissions:
+      id-token: write
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v3
+    - name: Checkout Repo
+      uses: actions/checkout@v4
 
-      - name: Setup Python ${{ inputs.python-version }}
-        uses: actions/setup-python@v4
-        with:
-          python-version: ${{ inputs.python-version }}
+    - name: Set up Python ${{ inputs.python-version }}
+      uses: actions/setup-python@v5
+      with:
+        python-version: ${{ inputs.python-version }}x
 
-      - name: Upgrade Pip
-        run: |
-          python -m pip install --upgrade pip
+    - name: Upgrade Pip
+      run: |
+        python -m pip install --upgrade pip
 
-      - name: Install Tools (Build)
-        run: |
-          python -m pip install build
+    - name: Install Tools (Build)
+      run: |
+        python -m pip install build
 
-      - name: Build Repo
-        run: python -m build ${{ inputs.setup-path }}
+    - name: Build package
+      run: python -m build ${{ inputs.setup-path }}
 
-      - name: Publish to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
-        with:
-          user: __token__
-          password: ${{ secrets.pypi-token }}
+    - name: Publish to PyPi
+      uses: pypa/gh-action-pypi-publish@release/v1
