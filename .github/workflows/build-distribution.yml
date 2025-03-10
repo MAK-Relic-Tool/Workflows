@@ -22,7 +22,7 @@ on:
 
 
 jobs:
-  black:
+  build-distribution:
     runs-on: ubuntu-latest
 
     steps:
