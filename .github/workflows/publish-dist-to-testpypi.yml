@@ -11,6 +11,9 @@ on:
         type: string
         default: "python-package-distributions"
 
+      publish-env:
+        type: string
+        default: "testpypi"
 jobs:
   pypi:
     runs-on: ubuntu-latest
@@ -18,7 +21,7 @@ jobs:
     name: Publish to Test PyPI
 
     environment:
-      name: pypi
+      name: ${{ inputs.publish-env }}
       url: https://pypi.org/p/${{ inputs.package-name }}x
 
     permissions:
