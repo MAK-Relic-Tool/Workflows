@@ -25,7 +25,7 @@ on:
 
 jobs:
   build-dist:
-    uses: MAK-Relic-Tool/Workflows/.github/workflows/build-distribution.yaml@main
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/build-distribution.yml@main
     with:
       path: ${{ inputs.path }}
       python-version: ${{ inputs.python-version }}
@@ -34,7 +34,7 @@ jobs:
 
   publish-dist:
     needs: build-dist
-    uses: MAK-Relic-Tool/Workflows/.github/workflows/publish-dist-to-pypi.yaml
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/publish-dist-to-pypi.yml
     with:
       package-name: ${{ inputs.package-name }}
       artifact-name: ${{ inputs.artifact-name }}
