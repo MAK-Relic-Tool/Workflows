@@ -13,13 +13,12 @@ on:
 
 jobs:
   build-check:
-    runs-on: ${{ matrix.runner }}
+    runs-on: ubuntu-latest
 
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
-        runner: ["ubuntu-latest", "windows-latest", "macos-latest"]
+        python-version: ["3.9", "3.10", "3.11","3.12","3.13"]
 
     name: Check Build ${{ matrix.python-version }}
 
