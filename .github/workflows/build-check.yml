@@ -7,6 +7,9 @@ on:
       setup-path:
         type: string
         default:  "."
+      repository:
+        type: string
+        default: ${{ github.repository }}
 
 jobs:
   build-check:
@@ -22,6 +25,9 @@ jobs:
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
+        with:
+          repository: ${{ inputs.repository }}
+          persist-credentials: false
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v4
