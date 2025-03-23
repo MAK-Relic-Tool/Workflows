@@ -35,19 +35,19 @@ on:
 
 jobs:
   black:
-    uses: ./.github/workflows/black.yml@main
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/black.yml@main
     with:
       repository: ${{ inputs.repository }}
       path: ${{ inputs.src-path }}
   build-check:
-    uses: ./.github/workflows/build-check.yml@main
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/build-check.yml@main
     with:
       setup-path: ${{inputs.setup-path}}
       repository: ${{ inputs.repository }}
       python-versions: ${{ inputs.python-versions }}
       fail-fast: ${{ inputs.fail-fast }}
   mypy:
-    uses: ./.github/workflows/mypy.yml@main
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/mypy.yml@main
     with:
       setup-path: ${{inputs.setup-path}}
       repository: ${{ inputs.repository }}
@@ -56,7 +56,7 @@ jobs:
       mypy-config: "pyproject.toml"
       package: ${{ inputs.package }}
   pylint:
-    uses: ./.github/workflows/pylint.yml@main
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/pylint.yml@main
     with:
       path: ${{inputs.src-path}}
       requirements-file: ${{inputs.requirements-file}}
@@ -64,7 +64,7 @@ jobs:
       python-versions: ${{inputs.python-versions}}
       fail-fast: ${{ inputs.fail-fast }}
   pytest-coverage:
-    uses: ./.github/workflows/pytest-coverage.yml@main
+    uses: MAK-Relic-Tool/Workflows/.github/workflows/pytest-coverage.yml@main
     with:
       setup-path: ${{inputs.setup-path}}
       test-path: ""
