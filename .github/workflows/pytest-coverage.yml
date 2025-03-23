@@ -64,7 +64,7 @@ jobs:
 
       - name: Build & Install Repo
         run: |
-          pip install ${{ inputs.setup-path }}
+          pip install -e ${{ inputs.setup-path }}
 
       - name: Run PyTest & Check Coverage
         run: |
