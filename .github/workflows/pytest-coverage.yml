@@ -68,7 +68,7 @@ jobs:
 
       - name: Run PyTest
         run: |
-          coverage run pytest -v ${{ inputs.test-path }} --color=yes
+          coverage run -m pytest -v ${{ inputs.test-path }} --color=yes
 
       - name: Check Coverage
         run: |
