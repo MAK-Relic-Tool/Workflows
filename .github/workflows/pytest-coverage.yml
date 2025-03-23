@@ -66,8 +66,11 @@ jobs:
         run: |
           pip install -e ${{ inputs.setup-path }}
 
-      - name: Run PyTest & Check Coverage
+      - name: Run PyTest
         run: |
           coverage run -m pytest -v ${{ inputs.test-path }} --color=yes
+
+      - name: Check Coverage
+        run: |
           coverage report
           
