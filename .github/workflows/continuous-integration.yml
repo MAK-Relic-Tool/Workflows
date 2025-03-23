@@ -30,6 +30,9 @@ on:
       runners: # If multiplatform tests aren't required, we can just do ubuntu
         type: string
         default: '["ubuntu-latest", "windows-latest", "macos-latest"]'
+      test-path:
+        type: string
+        default: "./tests"
 
 
 
@@ -67,9 +70,9 @@ jobs:
     uses: MAK-Relic-Tool/Workflows/.github/workflows/pytest-coverage.yml@main
     with:
       setup-path: ${{inputs.setup-path}}
-      test-path: ""
       requirements-file: ${{inputs.test-requirements-file}}
       repository: ${{ github.repository }}
       python-versions: ${{inputs.python-versions}}
       fail-fast: ${{ inputs.fail-fast }}
       runners: ${{ inputs.runners }}
+      test-path: ${{ inputs.test-path }}
