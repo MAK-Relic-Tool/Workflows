@@ -36,7 +36,7 @@ jobs:
         python-version: ${{ fromJSON(inputs.python-versions) }}
         runner: ${{ fromJSON(inputs.runners) }}
 
-    name: PyTest w/ Coverage (Python ${{ matrix.python-version }} [${{ matrix.runner }}])
+    name: PyTest & Coverage (Python ${{ matrix.python-version }} [${{ matrix.runner }}])
 
     steps:
       - name: Checkout Repo
@@ -66,10 +66,8 @@ jobs:
         run: |
           pip install ${{ inputs.setup-path }}
 
-      - name: Run PyTest
+      - name: Run PyTest & Check Coverage
         run: |
           coverage run -m pytest -v ${{ inputs.test-path }} --color=yes
-
-      - name: Check Coverage
-        run: |
           coverage report
+          
