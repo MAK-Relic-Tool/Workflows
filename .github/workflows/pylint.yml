@@ -13,17 +13,23 @@ on:
       repository:
         type: string
         default: ${{ github.repository }}
+      python-versions:
+        type: string
+        default: '["3.9", "3.10", "3.11", "3.12", "3.13"]'
+      fail-fast:
+        type: boolean
+        default: true
 
 jobs:
   pylint:
     runs-on: ubuntu-latest
 
     strategy:
-      fail-fast: false
+      fail-fast: ${{ inputs.fail-fast }}
       matrix:
-        python-version: ["3.9", "3.10", "3.11", "3.12", "3.13"]
+        python-version: ${{ fromJSON(inputs.python-versions) }}
 
-    name: Pylint ${{ matrix.python-version }}
+    name: Pylint (Python ${{ matrix.python-version }})
 
     steps:
       - name: Checkout Repo

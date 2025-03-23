@@ -1,0 +1,75 @@
+name: Continuous Integration
+
+on:
+  workflow_call:
+    inputs:
+      src-path:
+        type: string
+        default: "./src"
+      setup-path:
+        type: string
+        default: "."
+      repository:
+        type: string
+        default: ${{ github.repository }}
+      python-versions:
+        type: string
+        default: '["3.9", "3.10", "3.11", "3.12", "3.13"]'
+      fail-fast:
+        type: boolean
+        default: true
+      package: # The import package name, not the pip install name
+        type: string
+        required: true
+      requirements-file:
+        type: string
+        default: "requirements.txt"
+      test-requirements-file:
+        type: string
+        default: "test-requirements.txt"
+      runners: # If multiplatform tests aren't required, we can just do ubuntu
+        type: string
+        default: '["ubuntu-latest", "windows-latest", "macos-latest"]'
+
+
+
+jobs:
+  black:
+    uses: ./.github/workflows/black.yml@main
+    with:
+      repository: ${{ inputs.repository }}
+      path: ${{ inputs.src-path }}
+  build-check:
+    uses: ./.github/workflows/build-check.yml@main
+    with:
+      setup-path: ${{inputs.setup-path}}
+      repository: ${{ inputs.repository }}
+      python-versions: ${{ inputs.python-versions }}
+      fail-fast: ${{ inputs.fail-fast }}
+  mypy:
+    uses: ./.github/workflows/mypy.yml@main
+    with:
+      setup-path: ${{inputs.setup-path}}
+      repository: ${{ inputs.repository }}
+      python-versions: ${{ inputs.python-versions }}
+      fail-fast: ${{ inputs.fail-fast }}
+      mypy-config: "pyproject.toml"
+      package: ${{ inputs.package }}
+  pylint:
+    uses: ./.github/workflows/pylint.yml@main
+    with:
+      path: ${{inputs.src-path}}
+      requirements-file: ${{inputs.requirements-file}}
+      repository: ${{ github.repository }}
+      python-versions: ${{inputs.python-versions}}
+      fail-fast: ${{ inputs.fail-fast }}
+  pytest-coverage:
+    uses: ./.github/workflows/pytest-coverage.yml@main
+    with:
+      setup-path: ${{inputs.setup-path}}
+      test-path: ""
+      requirements-file: ${{inputs.test-requirements-file}}
+      repository: ${{ github.repository }}
+      python-versions: ${{inputs.python-versions}}
+      fail-fast: ${{ inputs.fail-fast }}
+      runners: ${{ inputs.runners }}
