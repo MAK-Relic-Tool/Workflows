@@ -18,20 +18,24 @@ on:
       python-versions:
         type: string
         default: '["3.9", "3.10", "3.11", "3.12", "3.13"]'
+      runners:
+        type: string
+        default: '["ubuntu-latest"]'
       fail-fast:
         type: boolean
         default: true
 
 jobs:
   mypy:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
 
     strategy:
       fail-fast: ${{ inputs.fail-fast }}
       matrix:
         python-version: ${{ fromJSON(inputs.python-versions) }}
+        runner: ${{ fromJSON(inputs.runners) }}
 
-    name: MyPy (Python ${{ matrix.python-version }})
+    name: MyPy (Python ${{ matrix.python-version }} [${{ matrix.runner }}])
 
     steps:
       - name: Checkout Repo

@@ -33,6 +33,9 @@ on:
       test-path:
         type: string
         default: "./tests"
+       mypy_runners:
+        type: string
+        default: '["ubuntu-latest"]'
 
 
 
@@ -58,6 +61,7 @@ jobs:
       fail-fast: ${{ inputs.fail-fast }}
       mypy-config: "pyproject.toml"
       package: ${{ inputs.package }}
+      runners: ${{ inputs.mypy_runners || inputs.runners }}
   pylint:
     uses: MAK-Relic-Tool/Workflows/.github/workflows/pylint.yml@main
     with:
