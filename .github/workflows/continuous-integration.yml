@@ -33,7 +33,7 @@ on:
       test-path:
         type: string
         default: "./tests"
-       mypy_runners:
+      mypy_runners:
         type: string
         default: '["ubuntu-latest"]'
 
